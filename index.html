@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swift - Luxury Fashion</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background-color: #ffffff;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .logo-icon {
+      color: #f59e0b;
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #f59e0b;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #f59e0b;
+      color: #000;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+
+    .hero-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      max-width: 600px;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .btn-primary:hover {
+      background-color: #f59e0b;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: #000000;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Discovery Section */
+    .discovery {
+      background-color: #f9fafb;
+    }
+
+    .discovery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .discovery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+      height: 400px;
+      cursor: pointer;
+    }
+
+    .discovery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .discovery-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .discovery-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 2rem;
+      color: #ffffff;
+    }
+
+    .discovery-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .discovery-card p {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* Featured Products Section */
+    .featured-products {
+      background-color: #ffffff;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      transition: box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background-color: #f3f4f6;
+    }
+
+    .product-info {
+      padding: 1.25rem;
+    }
+
+    .product-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #000000;
+      min-height: 2.5rem;
+    }
+
+    .product-price {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 0.75rem;
+    }
+
+    .product-colors {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .color-swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #e5e7eb;
+      cursor: pointer;
+    }
+
+    .product-sizes {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .size-badge {
+      padding: 0.25rem 0.5rem;
+      background-color: #f3f4f6;
+      color: #6b7280;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+
+    /* Promo Banner */
+    .promo-banner {
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: #000000;
+    }
+
+    .promo-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+    }
+
+    .promo-content {
+      position: relative;
+      z-index: 10;
+      color: #ffffff;
+      max-width: 600px;
+    }
+
+    .promo-label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      color: #f59e0b;
+    }
+
+    .promo-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .promo-subtitle {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .promo-offer {
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Sale Banner */
+    .sale-banner {
+      background-color: #f9fafb;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .sale-banner h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background-color: #ffffff;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .newsletter h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .newsletter-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .newsletter-input {
+      padding: 0.875rem 1rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.875rem;
+      outline: none;
+    }
+
+    .newsletter-input:focus {
+      border-color: #f59e0b;
+    }
+
+    .btn-subscribe {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 0.875rem 2rem;
+      border: none;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background-color 0.3s;
+    }
+
+    .btn-subscribe:hover {
+      background-color: #f59e0b;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid #e5e7eb;
+      padding: 2rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-logo-icon {
+      color: #f59e0b;
+      font-size: 2rem;
+    }
+
+    .footer-text {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      color: #000000;
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: color 0.3s;
+    }
+
+    .social-link:hover {
+      color: #f59e0b;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #000000;
+        padding: 1rem;
+      }
+
+      nav.active {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .discovery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+
+      .promo-title {
+        font-size: 2rem;
+      }
+    }
+    /* 1. Setup the container for stacking images */
+  .product-image-container {
+    position: relative;
+    width: 100%;
+    height: 280px; /* Matching your requested height */
+    overflow: hidden;
+    background-color: #f3f4f6; /* Light gray background while loading */
+    padding: 20px;
+  }
+
+  /* 2. Style both images to overlap */
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  }
+
+  /* 3. Position the secondary image directly on top of the primary */
+  .product-image.secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hidden by default */
+  }
+
+  /* 4. The Hover Effect */
+  .product-card:hover .product-image.primary {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-image.secondary {
+    opacity: 1;
+    transform: scale(1.05); /* Slight zoom for a premium feel */
+  }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">
+        <span class="logo-icon">👑</span>
+        <span>SWIFT</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" onclick="toggleMenu()">☰</button>
+      
+      <nav id="mainNav">
+        <ul>
+          <li><a href="#everything">EVERYTHING</a></li>
+          <li><a href="#women">WOMEN</a></li>
+          <li><a href="#men">MEN</a></li>
+          <li><a href="#accessories">ACCESSORIES</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-right">
+        <a href="#about" style="color: #ffffff; text-decoration: none; font-size: 0.875rem;">ABOUT</a>
+        <a href="#contact" style="color: #ffffff; text-decoration: none; font-size: 0.875rem;">CONTACT US</a>
+        <div class="cart-icon">
+          <span style="font-size: 1.25rem;">🛒</span>
+          <span class="cart-count">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="omega.jpg" alt="Luxury Watch" class="hero-background">
+    <div class="hero-content">
+      <h1>Indulge in Timeless Luxury</h1>
+      <p>Explore Our Exquisite Collection.</p>
+      <div class="hero-buttons">
+        <a href="#shop" class="btn btn-primary">Shop Now</a>
+        <a href="#more" class="btn btn-secondary">Find More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discovery Section -->
+  <section class="discovery">
+    <div class="container">
+      <h2 class="section-title">Discover The Power Of Luxury</h2>
+      <div class="discovery-grid">
+        <div class="discovery-card">
+          <img src="flower dress.jpg" alt="Summer in Style" height=400 width=400>
+          <div class="discovery-card-content">
+            <h3>Summer In Style</h3>
+            <p>Vibrant Collection of Resort Style</p>
+            <a href="#" class="btn btn-primary btn-small">Shop Now</a>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <img src="suit.JPG" alt="Unlock Your Inner Icon" height=400 width=400>
+          <div class="discovery-card-content">
+            <h3>Unlock Your Inner Icon</h3>
+            <p>Discover the power of Luxury Clothing</p>
+            <a href="#" class="btn btn-primary btn-small">Shop Now</a>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <img src="Modern elgance 1.jpg" alt="Modern Elegance" height=400 width=400>
+          <div class="discovery-card-content">
+            <h3>Modern Elegance</h3>
+            <p>Fashion that Makes a Statement</p>
+            <a href="#" class="btn btn-primary btn-small">Check Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-products">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="products-grid">
+      
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="D&G cotton shirt front.jpg" height=280 width=240 alt="Product" class="product-image primary">
+          <img src="D&G cotton shirt back.jpg" height=280 width=240 text=Back+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">D&G Cotton T-Shirt with Logo Embroidery Print</h3>
+          <p class="product-price">$327.00</p>
+          <div class="product-colors">
+            <span class="color-swatch" style="background-color: #000000;"></span>
+            <span class="color-swatch" style="background-color: #ffffff; border-color: #000;"></span>
+            <span class="color-swatch" style="background-color: #60a5fa;"></span>
+          </div>
+          <div class="product-sizes">
+            <span class="size-badge">S</span> <span class="size-badge">M</span> <span class="size-badge">L</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="D&G nylon jacket.jpeg" height=280 width=240 alt="Product" class="product-image primary">
+          <img src="D&G nylon jacket 2.jpg" height=280 width=240 text=Back+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">D&G Nylon Jacket</h3>
+          <p class="product-price">$1,340.00</p>
+          <div class="product-colors">
+            <span class="color-swatch" style="background-color: #3b82f6;"></span>
+            <span class="color-swatch" style="background-color: #000000;"></span>
+          </div>
+          <div class="product-sizes">
+            <span class="size-badge">S</span> <span class="size-badge">M</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="Armani overwight front.jpeg" height=280 width=240 alt="Product" class="product-image primary">
+          <img src="Armani overwight front.jpeg" height=280 width=240 text=Back+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Armani overweight with oversized dragon embroidery</h3>
+          <p class="product-price">$645.00</p>
+          <div class="product-colors">
+            <span class="color-swatch" style="background-color: #000000;"></span>
+            <span class="color-swatch" style="background-color: #ffffff; border-color: #000;"></span>
+          </div>
+          <div class="product-sizes">
+            <span class="size-badge">S</span> <span class="size-badge">M</span> <span class="size-badge">L</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="naked wolfe front.jpg"height=280 width=240 alt="Product" class="product-image primary">
+          <img src="naked wolfe front.jpg" height=280 width=240 text=Side+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Naked Wolfe boots</h3>
+          <p class="product-price">$2,370.00</p>
+          <div class="product-sizes">
+            <span class="size-badge">7</span> <span class="size-badge">8</span> <span class="size-badge">9</span> <span class="size-badge">10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="Nike orange and blue.jpg" height=280 width=240 alt="Product" class="product-image primary">
+          <img src="Nike orange and blue.jpg" height=280 width=240 text=Side+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Nike Ornage & Blue Shoes</h3>
+          <p class="product-price">$2,450.00</p>
+          <div class="product-sizes">
+            <span class="size-badge">7</span> <span class="size-badge">8</span> <span class="size-badge">9</span> <span class="size-badge">10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="Diamond Bracelet front.jpg" height=280&width=240 alt="Product" class="product-image primary">
+          <img src="diamond bracelet open.jpg" height=280 width=240 text=Detail+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Diamond Bangle Bracelet</h3>
+          <p class="product-price">$2,550.00</p>
+          <div class="product-colors">
+            <span class="color-swatch" style="background-color: #fbbf24;"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="18 karat.jpg" height=280 width=240 alt="Product" class="product-image primary">
+          <img src="18 karat.jpg" height=280 width=240 text=Zoom+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">DKJC Arms Watch in Yellow Gold 18KT And Perconda</h3>
+          <p class="product-price">$54,002.00</p>
+          <div class="product-colors">
+            <span class="color-swatch" style="background-color: #fbbf24;"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="back sweater.jpg" height=280 width=240 alt="Product" class="product-image primary">
+          <img src="black sweater 1.jpg" height=280 width=240 text=Open+View alt="Product Hover" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">FF Jacquard travel Case</h3>
+          <p class="product-price">$1,473.00</p>
+          <div class="product-colors">
+            <span class="color-swatch" style="background-color: #78350f;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Promo Banner -->
+  <section class="promo-banner">
+    <img src="nike.jpg" height=400 width=1920 alt="Special Edition" class="promo-background">
+    <div class="container">
+      <div class="promo-content">
+        <p class="promo-label">Limited Time Offer</p>
+        <h2 class="promo-title">Special Edition</h2>
+        <p class="promo-subtitle">Our Nike Orange Sneakers</p>
+        <p class="promo-offer">Buy This Sneakers At 20% Discount. Use Code OFF20</p>
+        <a href="#" class="btn btn-primary">Shop Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sale Banner -->
+  <section class="sale-banner">
+    <div class="container">
+      <h2>SALE UP TO 70% OFF FOR ALL CLOTHES & FASHION ITEMS, ON ALL BRANDS.</h2>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <h2>Subscribe</h2>
+      <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+        <input type="email" class="newsletter-input" placeholder="Your email address..." required>
+        <button type="submit" class="btn-subscribe">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <span class="footer-logo-icon">👑</span>
+        <span style="font-weight: bold;">SWIFT</span>
+      </div>
+      <p class="footer-text">Copyright © 2025 Swift USA. Powered by Swift USA.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link">📷</a>
+        <a href="#" class="social-link">🐦</a>
+        <a href="#" class="social-link">📺</a>
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">📞</a>
+        <a href="#" class="social-link">$</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    function toggleMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('active');
+    }
+
+    // Newsletter subscription
+    function handleSubscribe(event) {
+      event.preventDefault();
+      const email = event.target.querySelector('input[type="email"]').value;
+      alert('Thank you for subscribing with: ' + email);
+      event.target.reset();
+    }
+
+    // Shopping cart functionality
+    let cartCount = 0;
+    const cartCountElement = document.querySelector('.cart-count');
+
+    // Add to cart simulation (can be connected to product cards)
+    function addToCart() {
+      cartCount++;
+      cartCountElement.textContent = cartCount;
+    }
+
+    // Add click listeners to all product cards
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', function() {
+        addToCart();
+        const productTitle = this.querySelector('.product-title').textContent;
+        console.log('[v0] Added to cart:', productTitle);
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
