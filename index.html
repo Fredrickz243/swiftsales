@@ -578,6 +578,51 @@
     opacity: 1;
     transform: scale(1.05); /* Slight zoom for a premium feel */
   }
+  /* --- Responsive Grid Logic --- */
+
+/* 1. Default Mobile View (2 products per row) */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+  gap: 15px; /* Space between cards */
+  padding: 10px;
+}
+
+/* 2. Tablet View (3 products per row) */
+@media (min-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* 3. Desktop View (4 or 5 products per row) */
+@media (min-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr); /* Change to 5 if you want them smaller */
+    gap: 30px;
+  }
+}
+
+/* Ensure images don't break on very small screens */
+.product-image-container {
+  height: auto; 
+  aspect-ratio: 240 / 280; /* Maintains your original proportions */
+}
+
+/* Adjust font sizes for mobile so titles don't overlap */
+@media (max-width: 480px) {
+  .product-title {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+  .product-price {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+
   </style>
 </head>
 <body>
